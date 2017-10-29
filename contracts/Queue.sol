@@ -63,7 +63,7 @@ contract Queue {
 	 * limit is up
 	 */
 	function checkTime() {
-		if ((block.number - beginBlockNum[getFirst()] > time]){
+		if ((block.number - beginBlockNum[getFirst()]) > time]){
 			dequeue();
 		}
 	}
