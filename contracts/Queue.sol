@@ -12,6 +12,7 @@ contract Queue {
 	uint8 size = 5;
 	// YOUR CODE HERE
 	address[] list = new address[];
+	mapping(address => uint) beginBlockNum;
 	/* number of blocks within which you are allowed to participate */
 	uint time;
 	/* Add events */
@@ -62,22 +63,29 @@ contract Queue {
 	 * limit is up
 	 */
 	function checkTime() {
-		// YOUR CODE w
+		if ((block.number - beginBlockNum[getFirst()) > time]){
+			dequeue();
+		}
 	}
 
 	/* Removes the first person in line; either when their time is up or when
 	 * they are done with their purchase
 	 */
 	function dequeue() {
-		for (int i = 0; i < size; i ++) {
-			
+		for (int i = 1; i < size-1; i ++) {
+			list[i-1] = list[i]
 		}
+		address first = getFirst();
+		beginBlockNum[first] = block.number;
 	}
 
 	/* Places `addr` in the first empty position in the queue */
 	function enqueue(address addr) {
 		if (qsize() < 5){
 			list.push(addr);
+		}
+		if (checkPlace() == 0){
+			beginBlockNum[addr] = block.number;
 		}
 	}
 }
